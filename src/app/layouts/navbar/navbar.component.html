@@ -1,0 +1,47 @@
+<nav class="bg-white border-gray-200 shadow-md rounded-md ">
+  <div class="flex flex-wrap items-center justify-between  mx-6 p-4   ">
+    <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <span
+        class="self-center text-4xl font-semibold whitespace-nowrap bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-500   bg-clip-text text-transparent ">Social</span>
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15" />
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+
+      @if (authService.isAuthenticated()) {
+
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+
+        <a routerLink="/"
+          class="block py-2 px-3 me-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+          aria-current="page">
+          <img class="w-10 h-10 rounded-full overflow-hidden " src="/profile.png" alt="User avatar">
+        </a>
+
+
+
+        <button (click)="authService.logOut()"
+          class="px-3 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Log Out
+        </button>
+
+
+
+      </div>
+
+      }
+
+    </div>
+  </div>
+</nav>

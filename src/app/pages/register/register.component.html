@@ -1,0 +1,202 @@
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-10 overflow-hidden">
+  <div data-aos="fade-left" class="relative py-3 max-w-2xl mx-auto">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 -rotate-6 rounded-3xl">
+    </div>
+
+
+    <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-16">
+
+      <div class="flex justify-center items-center mb-8">
+
+        <button routerLink="/login" routerLinkActive="text-blue-500" class="text-2xl font-bold mr-4">
+          Login
+        </button>
+
+        <span class="text-gray-400">|</span>
+
+        <button routerLink="/register" routerLinkActive="text-blue-500" class="text-2xl font-bold ml-4">
+          Register
+        </button>
+
+      </div>
+
+
+
+      <form [formGroup]="registerForm" class="space-y-4" (ngSubmit)="onSubmit()">
+
+        @if (msgError()) {
+        <div class="flex p-2 justify-center items-center mb-4 text-sm text-red-800 rounded-lg bg-red-50 " role="alert">
+          <p>{{msgError()}}</p>
+        </div>
+        }
+
+
+
+        <!-- Social Login Buttons -->
+        <div class="grid grid-cols-2 gap-4">
+          <button type="button"
+            class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z" />
+            </svg>
+            Google
+          </button>
+          <button type="button"
+            class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M23.998 12c0-6.628-5.372-12-11.999-12C5.372 0 0 5.372 0 12c0 5.988 4.388 10.952 10.124 11.852v-8.384H7.078v-3.469h3.046V9.356c0-3.008 1.792-4.669 4.532-4.669 1.313 0 2.686.234 2.686.234v2.953H15.83c-1.49 0-1.955.925-1.955 1.874V12h3.328l-.532 3.469h-2.796v8.384c5.736-.9 10.124-5.864 10.124-11.853z" />
+            </svg>
+            Facebook
+          </button>
+        </div>
+
+        <div class="relative flex items-center justify-center">
+
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">Or continue with email</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Name -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" formControlName="name" name="name"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+
+            @let nameControl=registerForm.get('name');
+            @if (nameControl?.errors && nameControl?.touched) {
+            <div class="flex items-center py-1.5 px-3 mt-1 text-sm text-red-800   " role="alert">
+              @if (nameControl?.getError('required')) {
+              <p>Name is required</p>
+              }
+              @else if (nameControl?.getError('minlength') || nameControl?.getError('maxlength')) {
+              <p>Name must be between 3 and 20 characters</p>
+              }
+            </div>
+            }
+
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email address</label>
+            <input type="email" formControlName="email" name="email"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+
+            @let emailControl=registerForm.get('email');
+            @if (emailControl?.errors && emailControl?.touched) {
+            <div class="flex items-center py-1.5 px-3 mt-1 text-sm text-red-800   " role="alert">
+              @if (emailControl?.getError('required')) {
+              <p>Email is required</p>
+              }
+              @else if (emailControl?.getError('pattern')) {
+              <p>Invalid email format</p>
+              }
+            </div>
+            }
+          </div>
+
+          <!-- Date Of Birth -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Date Of Birth</label>
+            <input type="date" formControlName="dateOfBirth" name="dateOfBirth"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+
+            @let dateOfBirthControl=registerForm.get('dateOfBirth');
+            @if (dateOfBirthControl?.errors && dateOfBirthControl?.touched) {
+            <div class="flex items-center py-1.5 px-3 mt-1 text-sm text-red-800   " role="alert">
+              <p>Date Of Birth is required</p>
+            </div>
+            }
+
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" formControlName="password" name="password"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            @let passwordControl=registerForm.get('password');
+            @if (passwordControl?.errors && passwordControl?.touched) {
+            <div class="flex items-center py-1.5 px-3 mt-1 text-sm text-red-800   " role="alert">
+              @if (passwordControl?.getError('required')) {
+              <p>Password is required</p>
+              }
+              @else if (passwordControl?.getError('pattern')) {
+              <p>Password must contain at least 8 characters,
+                one number, and one special character </p>
+              }
+            </div>
+            }
+          </div>
+
+          <!-- rePassword -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">rePassword</label>
+            <input type="password" formControlName="rePassword" name="rePassword"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+
+            @let rePasswordControl=registerForm.get('rePassword');
+            @if (registerForm.getError('mismatch') && rePasswordControl?.touched) {
+            <div class="flex items-center py-1.5 px-3 mt-1 text-sm text-red-800   " role="alert">
+              <p>Passwords do not match</p>
+            </div>
+            }
+          </div>
+
+
+          <!-- Gender -->
+          <fieldset>
+            <legend class="text-sm font-medium text-gray-700 my-2">Gender</legend>
+
+            <div class="flex items-center space-x-4">
+
+              <div>
+                <input name="gender" formControlName="gender" type="radio" id="male" value="male"
+                  class=" text-blue-600   cursor-pointer">
+                <label for="male" class="ms-1  text-sm text-gray-700 cursor-pointer  ">
+                  Male</label>
+              </div>
+
+              <div>
+                <input id="female" formControlName="gender" value="female" name="gender" type="radio"
+                  class=" text-blue-600   cursor-pointer">
+                <label for="female" class="ms-1  text-sm text-gray-700 cursor-pointer ">
+                  Female</label>
+              </div>
+
+            </div>
+
+          </fieldset>
+        </div>
+
+        <button type="submit" [disabled]="isLoading()"
+          class="w-full  py-2 px-4  rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 disabled:bg-slate-500 disabled:cursor-not-allowed hover:bg-blue-800 focus:outline-none ">
+          @if (isLoading()) {
+          <i class="fas fa-spinner fa-spin me-2" aria-hidden="true"></i>
+          }
+          Create account
+        </button>
+
+      </form>
+
+      <p class="mt-4 text-center text-sm text-gray-600">
+        Already have an account?
+        <button routerLink="/login" class="font-medium text-blue-600 hover:text-blue-500">
+          Login here
+        </button>
+      </p>
+
+
+
+    </div>
+  </div>
+</div>
