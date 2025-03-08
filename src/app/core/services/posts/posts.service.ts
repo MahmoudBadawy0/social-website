@@ -13,12 +13,13 @@ export class PostsService {
   private readonly baseUrl = environments.baseUrl;
   readonly EndPoint = '/posts';
 
-  createPost(data: createPostData): Observable<any> {
+
+  createPost(data: FormData): Observable<any> {
     return this.http.post(this.baseUrl + this.EndPoint, data);
   }
 
   getAllPosts(p: number = 1): Observable<any> {
-    return this.http.get(this.baseUrl + this.EndPoint + `?page=${p}&limit=5`);
+    return this.http.get(this.baseUrl + this.EndPoint + `?page=${p}&limit=12`);
   }
 
   getUserPosts(): Observable<any> {
@@ -27,7 +28,7 @@ export class PostsService {
     );
   }
 
-  getSinglePost(id: string): Observable<any> {
+  getSinglePostById(id: string): Observable<any> {
     return this.http.get(this.baseUrl + this.EndPoint + '/' + id);
   }
 

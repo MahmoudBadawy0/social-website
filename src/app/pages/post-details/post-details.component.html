@@ -1,1 +1,31 @@
-<p>post-details works!</p>
+<div class="max-w-[550px] my-8 mx-auto bg-white rounded-lg shadow-md p-5 ">
+
+
+  <div class="flex items-start space-x-4">
+    <img class="w-10 h-10 rounded-full overflow-hidden " [src]="postDetails()?.user?.photo" alt="User avatar">
+    <div>
+      <h3 class="font-semibold">{{postDetails()?.user?.name}}</h3>
+      <p class="text-gray-500 text-sm">{{postDetails()?.createdAt | date:'medium'}}</p>
+    </div>
+  </div>
+
+  <div>
+
+    <p class="mt-4  text-gray-800">{{postDetails()?.body}}</p>
+
+    <div class="mt-4 ">
+      <img [src]="postDetails()?.image" alt="Post content" class="rounded-lg w-full ">
+    </div>
+
+
+  </div>
+
+
+
+  <app-comment [CommentId]="postDetails()?.id!"></app-comment>
+
+
+
+
+
+</div>

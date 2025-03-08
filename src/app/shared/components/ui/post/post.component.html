@@ -9,27 +9,20 @@
     </div>
   </div>
 
-  <p class="mt-4  text-gray-800">{{inPost().body}}</p>
+  <div class="cursor-pointer" [routerLink]="['/post-details', inPost().id]">
+
+    <p class="mt-4  text-gray-800">{{inPost().body}}</p>
+
+    <div class="mt-4 ">
+      <img [src]="inPost().image" alt="Post content" class="rounded-lg w-full ">
+    </div>
 
 
-  <div class="mt-4 ">
-    <img [src]="inPost().image" alt="Post content" class="rounded-lg w-full ">
   </div>
 
-  <!-- comments -->
-  <!-- <div class="overflow-auto max-h-80">
-    @defer (on interaction(showComments)) {
-    @for (item of inPost().comments; track $index) {
-    <app-comment [Comment]="item"></app-comment>
-    }
-    }
-    @placeholder {
-    <app-comment [Comment]="inPost().comments[0]"></app-comment>
-    }
-  </div> -->
 
 
-      <app-comment [CommentId]="inPost().id"></app-comment>
+  <app-comment [CommentId]="inPost().id"></app-comment>
 
 
 

@@ -20,9 +20,9 @@ import { Subscription } from 'rxjs';
 })
 export class CommentComponent implements OnInit {
   private readonly commentsService = inject(CommentsService);
-  CommentId: InputSignal<string> = input.required();
   private readonly formBuilder = inject(FormBuilder);
-
+  
+  CommentId: InputSignal<string> = input.required();
   postComments = signal<Comment[]>([]);
   createCommentUnsubscribe: Subscription = new Subscription();
   checkBtn = signal<boolean>(false);

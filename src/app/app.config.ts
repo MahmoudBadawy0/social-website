@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import {
   provideRouter,
   withInMemoryScrolling,
@@ -15,16 +15,21 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+
+import { provideAnimations } from '@angular/platform-browser/animations';
+
 import { errorsInterceptor } from './core/interceptors/errors/errors.interceptor';
-import { environments } from './core/environments/api_environment';
 import { tokenHeaderInterceptor } from './core/interceptors/token/token-header.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(NgxSpinnerModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorsInterceptor, tokenHeaderInterceptor])
+      withInterceptors([errorsInterceptor, tokenHeaderInterceptor,loadingInterceptor])
     ),
     provideRouter(
       routes,
@@ -32,5 +37,6 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
     provideClientHydration(withEventReplay()),
+    provideAnimations(),
   ],
 };

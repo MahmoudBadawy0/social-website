@@ -3,6 +3,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { authGuard } from './core/guards/auth.guard';
 import { loginGuard } from './core/guards/login.guard';
+import { rdetailsResolver } from './core/resolver/rdetails.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -48,6 +49,9 @@ export const routes: Routes = [
           import('./pages/post-details/post-details.component').then(
             (m) => m.PostDetailsComponent
           ),
+        resolve: {
+          resolverDetails: rdetailsResolver,
+        },
         title: 'Post Details',
       },
     ],
